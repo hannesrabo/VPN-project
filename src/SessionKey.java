@@ -47,22 +47,4 @@ public class SessionKey {
                         secretKey.getEncoded()
                 );
     }
-
-    public static void main(String args[]) {
-        try {
-            SessionKey key1 = new SessionKey(128);
-            System.out.println(key1.encodeKey());
-            SessionKey key2 = new SessionKey(key1.encodeKey());
-            System.out.println(key2.encodeKey());
-
-            if (key1.getSecretKey().equals(key2.getSecretKey())) {
-                System.out.println("Pass");
-            }
-            else {
-                System.out.println("Fail");
-            }
-        } catch (NoSuchAlgorithmException e) {
-            System.out.println("Could not create key for AES");
-        }
-    }
 }
