@@ -16,7 +16,7 @@ class SessionKeyTest {
         SessionKey key3 = new SessionKey(256);
         Assertions.assertEquals(256, key3.getSecretKey().getEncoded().length * 8);
 
-        System.out.println(key3.encodeKey());
+//        System.out.println(key3.encodeKey());
 
     }
 
