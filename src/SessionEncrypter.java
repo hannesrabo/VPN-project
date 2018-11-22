@@ -17,6 +17,8 @@ public class SessionEncrypter {
         // Create a new session
         sessionKey = new SessionKey(keyLength);
 
+        // As the target for this platform is java SE, there is no need to manually
+        // generate the IV parameter. This is generated automatically when left empty.
         encryptionCipher = Cipher.getInstance("AES/CTR/NoPadding");
         encryptionCipher.init(ENCRYPT_MODE, sessionKey.getSecretKey());
     }

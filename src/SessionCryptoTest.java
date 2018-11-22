@@ -17,6 +17,8 @@ public class SessionCryptoTest  {
         // Create encrypter instance for a given key length
         SessionEncrypter sessionencrypter = new SessionEncrypter(KEYLENGTH);
 
+        Assertions.assertNotEquals((new SessionEncrypter(KEYLENGTH)).encodeIV(), (new SessionEncrypter(KEYLENGTH)).encodeIV());
+
         // Attach output file to encrypter, and open input file
         try (
                 CipherOutputStream cryptoout = sessionencrypter.openCipherOutputStream(new FileOutputStream(CIPHER));
