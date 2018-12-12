@@ -1,3 +1,6 @@
+package vpn.crypto.test;
+
+import vpn.crypto.SessionKey;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,8 +18,6 @@ class SessionKeyTest {
 
         SessionKey key3 = new SessionKey(256);
         Assertions.assertEquals(256, key3.getSecretKey().getEncoded().length * 8);
-
-//        System.out.println(key3.encodeKey());
 
     }
 

@@ -1,3 +1,7 @@
+package vpn.crypto.test;
+
+import vpn.crypto.SessionDecrypter;
+import vpn.crypto.SessionEncrypter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -5,9 +9,9 @@ import java.io.*;
 import javax.crypto.*;
 
 public class SessionCryptoTest  {
-    static String PLAININPUT = "plaininput";
-    static String PLAINOUTPUT = "plainoutput";
-    static String CIPHER = "cipher";
+    static String PLAININPUT = "test_data/plaininput";
+    static String PLAINOUTPUT = "test_data/plainoutput";
+    static String CIPHER = "test_data/cipher";
     static Integer KEYLENGTH = 128;
 
     @Test
@@ -25,7 +29,7 @@ public class SessionCryptoTest  {
                 FileInputStream plainin = new FileInputStream(PLAININPUT);
         ) {
 
-            // Copy data byte by byte from plain input to crypto output via encrypter
+            // Copy data byte by byte from plain input to vpn.crypto output via encrypter
 
             while ((b = plainin.read()) != -1) {
                 cryptoout.write(b);

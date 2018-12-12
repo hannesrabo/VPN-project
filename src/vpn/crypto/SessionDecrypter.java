@@ -1,3 +1,5 @@
+package vpn.crypto;
+
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.NoSuchPaddingException;

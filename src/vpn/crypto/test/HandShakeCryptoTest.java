@@ -1,3 +1,6 @@
+package vpn.crypto.test;
+
+import vpn.crypto.HandShakeCrypto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -9,15 +12,13 @@ import java.security.*;
 import java.security.cert.CertificateException;
 import java.security.spec.InvalidKeySpecException;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class HandShakeCryptoTest {
 
     @Test
     void decrypt() throws NoSuchAlgorithmException, IOException, InvalidKeySpecException, CertificateException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException {
 
-        PrivateKey privateKey = HandShakeCrypto.getPrivateKeyFromKeyFile("user_key.pem");
-        PublicKey publicKey = HandShakeCrypto.getPublicKeyFromCertFile("user.pem");
+        PrivateKey privateKey = HandShakeCrypto.getPrivateKeyFromKeyFile("cert/user_key.pem");
+        PublicKey publicKey = HandShakeCrypto.getPublicKeyFromCertFile("cert/user_cert.pem");
 
         byte[] plaintext = "hello this is a string".getBytes();
         byte[] ciphertext = HandShakeCrypto.encrypt(plaintext, publicKey);
@@ -31,14 +32,14 @@ class HandShakeCryptoTest {
 
     @Test
     void getPublicKeyFromCertFile() throws IOException, CertificateException {
-        PublicKey myKey = HandShakeCrypto.getPublicKeyFromCertFile("user.pem");
+        PublicKey myKey = HandShakeCrypto.getPublicKeyFromCertFile("cert/user_cert.pem");
 
         Assertions.assertTrue(myKey.getEncoded().length > 0);
     }
 
     @Test
     void getPrivateKeyFromKeyFile() throws NoSuchAlgorithmException, IOException, InvalidKeySpecException {
-        PrivateKey myKey = HandShakeCrypto.getPrivateKeyFromKeyFile("user_key.pem");
+        PrivateKey myKey = HandShakeCrypto.getPrivateKeyFromKeyFile("cert/user_key.pem");
 
         Assertions.assertTrue(myKey.getEncoded().length > 0);
     }
