@@ -31,6 +31,31 @@ class HandShakeCryptoTest {
     }
 
     @Test
+    void encodeAndDecode() throws NoSuchAlgorithmException, IOException, InvalidKeySpecException, CertificateException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchPaddingException {
+
+        PrivateKey privateKey = HandShakeCrypto.getPrivateKeyFromKeyFile("cert/user_key.pem");
+        PublicKey publicKey = HandShakeCrypto.getPublicKeyFromCertFile("cert/user_cert.pem");
+
+        byte[] plaintext = "hello this is a string".getBytes();
+        byte[] ciphertext = HandShakeCrypto.encrypt(plaintext, publicKey);
+
+        byte[] ciphertext2 = HandShakeCrypto.encrypt(plaintext, publicKey);
+
+//        Assertions.assertEquals(new String(ciphertext), new String(ciphertext2));
+
+        String transport = HandShakeCrypto.encodeByteArray(ciphertext);
+        byte[] ciperTextOnTheOtherSide = HandShakeCrypto.decodeString(transport);
+
+        byte[] decryptedText = HandShakeCrypto.decrypt(ciperTextOnTheOtherSide, privateKey);
+
+        byte[] decryptedText2 = HandShakeCrypto.decrypt(ciphertext2, privateKey);
+
+
+        Assertions.assertEquals(new String(plaintext), new String(decryptedText));
+        Assertions.assertEquals(new String(plaintext), new String(decryptedText2));
+    }
+
+    @Test
     void getPublicKeyFromCertFile() throws IOException, CertificateException {
         PublicKey myKey = HandShakeCrypto.getPublicKeyFromCertFile("cert/user_cert.pem");
 

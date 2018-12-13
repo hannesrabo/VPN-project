@@ -20,22 +20,22 @@ public class SessionDecrypter {
 
     /**
      * Create a new session encrypter with parameters.
-     * @param key The key to use for encrypting the stream.
-     * @param iv The initialization vector for the CTR mode.
+     * @param encodedKey The key to use for encrypting the stream.
+     * @param encodedIV The initialization vector for the CTR mode.
      */
-    public SessionDecrypter(String key, String iv)
+    public SessionDecrypter(String encodedKey, String encodedIV)
             throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException
     {
-        sessionKey = new SessionKey(key);
+        sessionKey = new SessionKey(encodedKey);
 
-        byte[] encodedKey = sessionKey.getSecretKey().getEncoded();
-        byte[] encodedIV  = Base64.getDecoder().decode(iv);
+        byte[] key = sessionKey.getSecretKey().getEncoded();
+        byte[] iv  = Base64.getDecoder().decode(encodedIV);
 
         decryptionCipher = Cipher.getInstance("AES/CTR/NoPadding");
         decryptionCipher.init(
                 DECRYPT_MODE,
-                new SecretKeySpec(encodedKey, "AES"),
-                new IvParameterSpec(encodedIV)
+                new SecretKeySpec(key, "AES"),
+                new IvParameterSpec(iv)
             );
     }
 

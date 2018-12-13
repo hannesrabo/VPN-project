@@ -14,6 +14,12 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Properties;
 
+class InvalidHandshakeMessageException extends Exception {
+    public InvalidHandshakeMessageException(String message) {
+        super(message);
+    }
+}
+
 /*
  * A vpn.Handshake message is represented as a set of parameters -- <key, value> pairs.
  * Extends Properties class.

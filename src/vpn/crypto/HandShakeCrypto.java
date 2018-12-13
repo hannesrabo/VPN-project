@@ -17,6 +17,14 @@ import static javax.crypto.Cipher.DECRYPT_MODE;
 
 public class HandShakeCrypto {
 
+    public static String encodeByteArray(byte[] bytes) {
+        return Base64.getEncoder().withoutPadding().encodeToString(bytes);
+    }
+
+    public static byte[] decodeString(String encodedString) {
+        return Base64.getDecoder().decode(encodedString);
+    }
+
     /**
      * Encrypt a byte buffer with plaintext
      * @param plaintext The buffer containing text to encrypt
