@@ -1,8 +1,4 @@
-package vpn;/*
- * vpn.Handshake message encoding/decoding and transmission
- * for IK2206 project.
- *
- */
+package vpnutil;
 
 import java.io.IOException;
 import java.io.ByteArrayOutputStream;
@@ -13,12 +9,6 @@ import java.nio.charset.StandardCharsets;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Properties;
-
-class InvalidHandshakeMessageException extends Exception {
-    public InvalidHandshakeMessageException(String message) {
-        super(message);
-    }
-}
 
 /*
  * A vpn.Handshake message is represented as a set of parameters -- <key, value> pairs.
@@ -68,7 +58,7 @@ public class HandshakeMessage extends Properties {
      *
      * First read a string with an integer followed by whitespace, 
      * which gives the size of the message in bytes. Then read the XML data
-     * and convert it to a vpn.HandshakeMessage.
+     * and convert it to a vpnutil.HandshakeMessage.
      */
     public void recv(Socket socket) throws IOException {
         int length = 0;

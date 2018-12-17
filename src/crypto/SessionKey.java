@@ -1,4 +1,4 @@
-package vpn.crypto;
+package crypto;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;

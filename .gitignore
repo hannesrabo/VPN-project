@@ -1,1 +1,8 @@
 test_data/*
+
+\.idea/
+
+cert/cert_old/
+cert/*-private.pem
+
+out/*

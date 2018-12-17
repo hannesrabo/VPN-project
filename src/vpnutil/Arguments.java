@@ -1,10 +1,10 @@
-package vpn;
+package vpnutil;
 
 import java.util.Properties;
 
 /**
  * Process command line arguments of the form "--argument=value".
- * Store arguments as in vpn.Arguments object (derived from Properties).
+ * Store arguments as in vpnutil.Arguments object (derived from Properties).
  *
  */
 

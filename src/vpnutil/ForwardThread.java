@@ -1,5 +1,5 @@
-package vpn; /**
- * vpn.ForwardThread handles the TCP forwarding between a socket input stream (source)
+package vpnutil; /**
+ * vpnutil.ForwardThread handles the TCP forwarding between a socket input stream (source)
  * and a socket output stream (destination). It reads the input stream and forwards
  * everything to the output stream. If some of the streams fails, the forwarding
  * is stopped and the parent thread is notified to close all its connections.

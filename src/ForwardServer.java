@@ -1,4 +1,4 @@
-package vpn; /**
+/**
  * Port forwarding server. Forward data
  * between two TCP ports. Based on Nakov TCP Socket Forward Server 
  * and adapted for IK2206.
@@ -13,15 +13,15 @@ package vpn; /**
  * (c) 2001 by Svetlin Nakov - http://www.nakov.com
  */
  
-import vpn.crypto.HandShakeCrypto;
-import vpn.crypto.SessionDecrypter;
-import vpn.crypto.SessionEncrypter;
-import vpn.crypto.VerifyCertificate;
+import crypto.HandShakeCrypto;
+import crypto.SessionDecrypter;
+import crypto.SessionEncrypter;
+import crypto.VerifyCertificate;
+import vpnutil.*;
 
 import java.lang.Integer;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.io.IOException;
 import java.security.PublicKey;
@@ -34,7 +34,7 @@ public class ForwardServer
     private static final int KEY_LENGTH = 256;
     public static final int DEFAULTSERVERPORT = 2206;
     public static final String DEFAULTSERVERHOST = "localhost";
-    public static final String PROGRAMNAME = "vpn.ForwardServer";
+    public static final String PROGRAMNAME = "ForwardServer";
     private static Arguments arguments;
 
 

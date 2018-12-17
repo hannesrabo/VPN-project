@@ -1,4 +1,4 @@
-package vpn.crypto;
+package crypto;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;

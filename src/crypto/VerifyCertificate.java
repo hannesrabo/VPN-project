@@ -1,7 +1,6 @@
-package vpn.crypto;
+package crypto;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.cert.*;
 import java.security.cert.Certificate;

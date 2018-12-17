@@ -1,4 +1,4 @@
-package vpn.crypto;
+package crypto;
 
 import javax.crypto.Cipher;
 import javax.crypto.CipherOutputStream;

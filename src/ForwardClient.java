@@ -1,4 +1,4 @@
-package vpn; /**
+/**
  * Port forwarding client. Forward data
  * between two TCP ports. Based on Nakov TCP Socket Forward Server 
  * and adapted for IK2206.
@@ -14,7 +14,11 @@ package vpn; /**
  */
 
  
-import vpn.crypto.*;
+import crypto.*;
+import vpnutil.Arguments;
+import vpnutil.ForwardServerClientThread;
+import vpnutil.HandshakeMessage;
+import vpnutil.InvalidHandshakeMessageException;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -39,7 +43,7 @@ public class ForwardClient
     private static final boolean ENABLE_LOGGING = true;
     public static final int DEFAULTSERVERPORT = 2206;
     public static final String DEFAULTSERVERHOST = "localhost";
-    public static final String PROGRAMNAME = "vpn.ForwardClient";
+    public static final String PROGRAMNAME = "ForwardClient";
 
     private static Arguments arguments;
     private static int serverPort;
@@ -167,7 +171,7 @@ public class ForwardClient
 //            e.printStackTrace();
 //        } catch (InvalidKeyException e) {
 //            e.printStackTrace();
-//        } catch (InvalidHandshakeMessageException e) {
+//        } catch (vpnutil.InvalidHandshakeMessageException e) {
 //            e.printStackTrace();
 //        } catch (NoSuchPaddingException e) {
 //            e.printStackTrace();
@@ -187,7 +191,7 @@ public class ForwardClient
         
         try {
             /* Create a new socket. This is to where the user should connect.
-             * vpn.ForwardClient sets up port forwarding between this socket
+             * ForwardClient sets up port forwarding between this socket
              * and the ServerHost/ServerPort learned from the handshake */
             listensocket = new ServerSocket();
             /* Let the system pick a port number */

@@ -1,5 +1,5 @@
-package vpn; /**
- * vpn.ForwardServerClientThread handles the clients of Nakov Forward Server. It
+package vpnutil; /**
+ * vpnutil.ForwardServerClientThread handles the clients of Nakov Forward Server. It
  * connects two sockets and starts the TCP forwarding between given client
  * and its assigned server. After the forwarding is failed and the two threads
  * are stopped, closes the sockets.
@@ -20,8 +20,8 @@ package vpn; /**
  * Peter Sjodin, KTH
  */
 
-import vpn.crypto.SessionDecrypter;
-import vpn.crypto.SessionEncrypter;
+import crypto.SessionDecrypter;
+import crypto.SessionEncrypter;
 
 import java.net.Socket;
 import java.net.ServerSocket;
@@ -30,7 +30,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class ForwardServerClientThread extends Thread {
-    private ForwardClient mForwardClient = null;
+//    private ForwardClient mForwardClient = null;
     private Socket mClientSocket = null;
     private Socket mServerSocket = null;
     private ServerSocket mListenSocket = null;

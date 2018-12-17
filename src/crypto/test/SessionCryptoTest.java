@@ -1,7 +1,7 @@
-package vpn.crypto.test;
+package crypto.test;
 
-import vpn.crypto.SessionDecrypter;
-import vpn.crypto.SessionEncrypter;
+import crypto.SessionDecrypter;
+import crypto.SessionEncrypter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +29,7 @@ public class SessionCryptoTest  {
                 FileInputStream plainin = new FileInputStream(PLAININPUT);
         ) {
 
-            // Copy data byte by byte from plain input to vpn.crypto output via encrypter
+            // Copy data byte by byte from plain input to crypto output via encrypter
 
             while ((b = plainin.read()) != -1) {
                 cryptoout.write(b);

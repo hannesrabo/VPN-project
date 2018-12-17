@@ -1,6 +1,6 @@
-package vpn.crypto.test;
+package crypto.test;
 
-import vpn.crypto.SessionKey;
+import crypto.SessionKey;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

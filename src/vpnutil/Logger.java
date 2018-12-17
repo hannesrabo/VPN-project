@@ -1,4 +1,4 @@
-package vpn;
+package vpnutil;
 
 public class Logger {
     private static final boolean ENABLE_LOGGING = true;
