@@ -109,26 +109,22 @@ public class ForwardClient
         }
 
         // Decrypt the session key and IV and create a new session decryptor.
-        String encodedSessionKey =
-                new String(
+        byte[] sessionKey =
                     HandShakeCrypto.decrypt(
                         HandShakeCrypto.decodeString(sessionMessage.getParameter("SessionKey")),
                         privateKey
-                    )
-                );
+                    );
 
-        String encodedIV =
-                new String(
+        byte[] sessionIV =
                     HandShakeCrypto.decrypt(
                         HandShakeCrypto.decodeString(sessionMessage.getParameter("SessionIV")),
                         privateKey
-                    )
-                );
+                    );
 
         // Create both encryptor and decryptor for the same key as we need to encrypt and decrypt
         // traffic to have a bidirectional stream
-        sessionDecrypter = new SessionDecrypter(encodedSessionKey, encodedIV);
-        sessionEncrypter = new SessionEncrypter(encodedSessionKey, encodedIV);
+        sessionDecrypter = new SessionDecrypter(sessionKey, sessionIV);
+        sessionEncrypter = new SessionEncrypter(sessionKey, sessionIV);
 
 
         serverHost = sessionMessage.getParameter("ServerHost");

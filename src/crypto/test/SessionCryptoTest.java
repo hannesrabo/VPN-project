@@ -21,7 +21,7 @@ public class SessionCryptoTest  {
         // Create encrypter instance for a given key length
         SessionEncrypter sessionencrypter = new SessionEncrypter(KEYLENGTH);
 
-        Assertions.assertNotEquals((new SessionEncrypter(KEYLENGTH)).encodeIV(), (new SessionEncrypter(KEYLENGTH)).encodeIV());
+        Assertions.assertNotEquals(new String((new SessionEncrypter(KEYLENGTH)).getRawIV()), new String((new SessionEncrypter(KEYLENGTH)).getRawIV()));
 
         // Attach output file to encrypter, and open input file
         try (
@@ -39,7 +39,7 @@ public class SessionCryptoTest  {
         // Now ciphertext is in cipher output file. Decrypt it back to plaintext.
 
         // Create decrypter instance using cipher parameters from encrypter  
-        SessionDecrypter sessiondecrypter = new SessionDecrypter(sessionencrypter.encodeKey(), sessionencrypter.encodeIV());
+        SessionDecrypter sessiondecrypter = new SessionDecrypter(sessionencrypter.getRawKey(), sessionencrypter.getRawIV());
 
         // Attach input file to decrypter, and open output file
         try (

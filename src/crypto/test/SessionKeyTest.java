@@ -35,8 +35,7 @@ class SessionKeyTest {
 
         Assertions.assertEquals(key1.getSecretKey().getEncoded().length * 8, 128);
 
-        String keyInput = key1.encodeKey();
-        SessionKey key2 = new SessionKey(keyInput);
+        SessionKey key2 = new SessionKey(key1.getRawKey());
         Assertions.assertEquals(key1.getSecretKey().getEncoded().length * 8, 128);
 
         Assertions.assertTrue(key1.getSecretKey().equals(key2.getSecretKey()));

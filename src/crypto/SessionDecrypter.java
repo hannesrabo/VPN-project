@@ -15,28 +15,38 @@ import static javax.crypto.Cipher.DECRYPT_MODE;
 
 public class SessionDecrypter {
 
-    private SessionKey sessionKey;
+//    private SessionKey sessionKey;
     private Cipher decryptionCipher;
 
-    /**
-     * Create a new session encrypter with parameters.
-     * @param encodedKey The key to use for encrypting the stream.
-     * @param encodedIV The initialization vector for the CTR mode.
-     */
-    public SessionDecrypter(String encodedKey, String encodedIV)
+//    /**
+//     * Create a new session encrypter with parameters.
+//     * @param encodedKey The key to use for encrypting the stream.
+//     * @param iv The initialization vector for the CTR mode.
+//     */
+//    public SessionDecrypter(String encodedKey, byte[] iv)
+//            throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException
+//    {
+//        sessionKey = new SessionKey(encodedKey);
+//
+//        byte[] key = sessionKey.getSecretKey().getEncoded();
+//
+//        decryptionCipher = Cipher.getInstance("AES/CTR/NoPadding");
+//        decryptionCipher.init(
+//                DECRYPT_MODE,
+//                new SecretKeySpec(key, "AES"),
+//                new IvParameterSpec(iv)
+//            );
+//    }
+
+    public SessionDecrypter(byte[] rawKey, byte[] rawIV)
             throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException
     {
-        sessionKey = new SessionKey(encodedKey);
-
-        byte[] key = sessionKey.getSecretKey().getEncoded();
-        byte[] iv  = Base64.getDecoder().decode(encodedIV);
-
         decryptionCipher = Cipher.getInstance("AES/CTR/NoPadding");
         decryptionCipher.init(
                 DECRYPT_MODE,
-                new SecretKeySpec(key, "AES"),
-                new IvParameterSpec(iv)
-            );
+                new SecretKeySpec(rawKey, "AES"),
+                new IvParameterSpec(rawIV)
+        );
     }
 
     /**

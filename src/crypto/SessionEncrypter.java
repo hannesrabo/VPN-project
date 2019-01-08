@@ -28,40 +28,53 @@ public class SessionEncrypter {
         encryptionCipher.init(ENCRYPT_MODE, sessionKey.getSecretKey());
     }
 
-    public SessionEncrypter(String encodedKey, String encodedIV) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
-        // Create a new session
-        sessionKey = new SessionKey(encodedKey);
+//    public SessionEncrypter(String encodedKey, String encodedIV) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
+//        // Create a new session
+//        sessionKey = new SessionKey(encodedKey);
+//
+//        byte[] key = sessionKey.getSecretKey().getEncoded();
+//        byte[] iv  = Base64.getDecoder().decode(encodedIV);
+//
+//        // As the target for this platform is java SE, there is no need to manually
+//        // generate the IV parameter. This is generated automatically when left empty.
+//        encryptionCipher = Cipher.getInstance("AES/CTR/NoPadding");
+//        encryptionCipher.init(
+//                ENCRYPT_MODE,
+//                new SecretKeySpec(key, "AES"),
+//                new IvParameterSpec(iv)
+//        );
+//    }
 
-        byte[] key = sessionKey.getSecretKey().getEncoded();
-        byte[] iv  = Base64.getDecoder().decode(encodedIV);
+    public SessionEncrypter(byte[] rawKey, byte[] rawIV) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
+        // Create a new session
+        sessionKey = new SessionKey(rawKey);
 
         // As the target for this platform is java SE, there is no need to manually
         // generate the IV parameter. This is generated automatically when left empty.
         encryptionCipher = Cipher.getInstance("AES/CTR/NoPadding");
         encryptionCipher.init(
                 ENCRYPT_MODE,
-                new SecretKeySpec(key, "AES"),
-                new IvParameterSpec(iv)
+                new SecretKeySpec(rawKey, "AES"),
+                new IvParameterSpec(rawIV)
         );
     }
 
     /**
      * @return The key encoded as a base64 string
      */
-    public String encodeKey() {
-        return sessionKey.encodeKey();
+//    public String encodeKey() {
+//        return sessionKey.encodeKey();
+//    }
+
+    public byte[] getRawKey() {
+        return sessionKey.getRawKey();
     }
 
     /**
      * @return The initialization vector for the CTR mode encoded as a base64 string
      */
-    public String encodeIV() {
-        return Base64
-                .getEncoder()
-                .withoutPadding()
-                .encodeToString(
-                        encryptionCipher.getIV()
-                );
+    public byte[] getRawIV() {
+        return encryptionCipher.getIV();
     }
 
     /**

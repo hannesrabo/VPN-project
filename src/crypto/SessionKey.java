@@ -20,14 +20,18 @@ public class SessionKey {
         secretKey = generator.generateKey();
     }
 
-    /**
-     * Create session from a base 64 encoded string representation of the secret key.
-     * @param encodedkey The base 64 encoded string representation of the secret key
-     */
-    public SessionKey(String encodedkey) {
-        byte[] keyBuffer = Base64.getDecoder().decode(encodedkey);
-        secretKey = new SecretKeySpec(keyBuffer, "AES");
+//    /**
+//     * Create session from a base 64 encoded string representation of the secret key.
+//     * @param encodedkey The base 64 encoded string representation of the secret key
+//     */
+//    public SessionKey(String encodedkey) {
+//        byte[] keyBuffer = Base64.getDecoder().decode(encodedkey);
+//        secretKey = new SecretKeySpec(keyBuffer, "AES");
+//
+//    }
 
+    public SessionKey(byte[] rawKey) {
+        secretKey = new SecretKeySpec(rawKey, "AES");
     }
 
     /**
@@ -48,5 +52,9 @@ public class SessionKey {
                 .encodeToString(
                         secretKey.getEncoded()
                 );
+    }
+
+    public byte[] getRawKey() {
+        return secretKey.getEncoded();
     }
 }

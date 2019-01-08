@@ -106,19 +106,15 @@ public class ForwardServer
         listenSocket.bind(null);
 
         sessionEncrypter = new SessionEncrypter(KEY_LENGTH);
-        sessionDecrypter = new SessionDecrypter(sessionEncrypter.encodeKey(), sessionEncrypter.encodeIV());
+        sessionDecrypter = new SessionDecrypter(sessionEncrypter.getRawKey(), sessionEncrypter.getRawIV());
 
         PublicKey clientPublicKey = clientCert.getPublicKey();
-
-
+        
         HandshakeMessage sessionMessage = new HandshakeMessage();
 
-        byte[] crypto = HandShakeCrypto.encrypt(sessionEncrypter.encodeKey().getBytes(), clientPublicKey);
-        String encryptedKey =  HandShakeCrypto.encodeByteArray(crypto);
-
         sessionMessage.putParameter("MessageType", "Session");
-        sessionMessage.putParameter("SessionKey", HandShakeCrypto.encodeByteArray(HandShakeCrypto.encrypt(sessionEncrypter.encodeKey().getBytes(), clientPublicKey)));
-        sessionMessage.putParameter("SessionIV", HandShakeCrypto.encodeByteArray(HandShakeCrypto.encrypt(sessionEncrypter.encodeIV().getBytes(), clientPublicKey)));
+        sessionMessage.putParameter("SessionKey", HandShakeCrypto.encodeByteArray(HandShakeCrypto.encrypt(sessionEncrypter.getRawKey(), clientPublicKey)));
+        sessionMessage.putParameter("SessionIV", HandShakeCrypto.encodeByteArray(HandShakeCrypto.encrypt(sessionEncrypter.getRawIV(), clientPublicKey)));
         sessionMessage.putParameter("ServerHost", listenSocket.getInetAddress().getHostAddress());
         sessionMessage.putParameter("ServerPort", Integer.toString(listenSocket.getLocalPort()));
 
